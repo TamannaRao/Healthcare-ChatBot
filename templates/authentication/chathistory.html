@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            display: flex;
+        }
+
+        #sidebar {
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+        }
+
+        #content {
+            flex-grow: 1;
+            padding: 2px;
+            margin-left: 250px;
+            max-width: auto;
+            margin-bottom: 50px;
+        }
+
+        .nav-link {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .nav-link:hover {
+            background-color: #555;
+        }
+
+        .header {
+            text-align: center;
+            opacity: 0.7;
+            font-size: 36px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .chat-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chat-item {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .message {
+            font-weight: bold;
+        }
+
+        .timestamp {
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="sidebar">
+            <a href="./chathome" class="nav-link">Home</a>
+            <a href="./chathistory" class="nav-link">History</a>
+            <a href="#" class="nav-link">Location</a>
+            <a href="./profile" class="nav-link">Profile</a>
+            <a href="./signout" class="nav-link">Log out</a>
+        </div>
+        <div id="content">
+            <div class="header">Chat History</div>
+            <ul class="chat-list">
+                {% for message in chat_history %}
+                <li class="chat-item">
+                    <span class="message">{{ message.content }}</span>
+                    <span class="timestamp">{{ message.timestamp }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

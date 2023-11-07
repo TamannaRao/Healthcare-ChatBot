@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+   <style>
+       body {
+    background-image: url('https://149842022.v2.pressablecdn.com/wp-content/uploads/sites/59/2016/03/photo-1443527216320-7e744084f5a7-1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 350px;
+}
+h1 {
+    margin: 0 0 20px;
+    color: #333;
+}
+form {
+    text-align: left;
+}
+label {
+    display: block;
+    margin-top: 10px;
+    color: #333;
+}
+input[type="text"],
+input[type="email"] ,
+input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+input[type="submit"] {
+    width: 100%;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+.error-message {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+    border-radius: 10px;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+   </style>
+</head>
+<body>
+   
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form action="/signup" method="post">
+            {% csrf_token %}
+            <label for="username">User Name:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username (only letters and numbers)" Required>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" Required>
+            <label for="password">Create Password:</label>
+            <input type="password" id="password" name="password" placeholder="Create a password" Required>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" Required>
+            <p>Already have an Account <a href="/signin">Sign In</a></p>
+            <br>
+        
+            <input type="submit" id="submitbutton" value="Create Account">
+        </form>
+        <br>
+         <!-- Display error message -->
+      {% if messages %}
+      <div class="error-message">
+ {% for message in messages %}
+     {{ message }}
+ {% endfor %}
+     </div>
+   {% endif %}
+    </div>
+</body>
+</html>

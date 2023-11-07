@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI HealthCare Chatbot</title>
+    <style>
+        body {
+    background-color:white ;
+    background-image :url('https://img.freepik.com/free-vector/background-realistic-abstract-technology-particle_23-2148431735.jpg?w=900&t=st=1698817914~exp=1698818514~hmac=82f69568a0f281ec56cfc69cf1773735c122296acb528a70fe45c0cf4ba0e732');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+}
+
+.chatbot {
+    position: relative;
+    animation: walk 4s linear infinite;
+}
+
+.bot-walk {
+    width: 500px;
+    height: 500px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+   
+}
+
+@keyframes walk {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(300px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+        .description {
+            position:absolute;
+            left:30px;
+            background-color: rgba(255, 255, 255, 0.7); 
+            padding: 30px 20px 20px 20px;
+            border-radius: 10px;
+            text-align: center; 
+            text-shadow: 1px 1px rgb(54, 141, 248);
+            box-shadow: 20px 20px rgb(4, 99, 187);
+            font-size: 25px;
+            width: 350px;
+            height: 300px;
+        }
+
+      
+    </style>
+</head>
+<body>
+   
+
+
+    <div class="container">
+        <div class="chatbot">
+            <img id="bot" src="https://jungleworks.com/wp-content/uploads/2021/04/1_9I6EIL5NG20A8se5afVmOg.gif" alt="Chatbot" class="bot-walk">
+        </div>
+        <button id="user">As a User</button>
+        <button id="admin">As an Admin</button>
+        
+    </div>
+
+    <div class="description">
+       
+        <p>             WELCOME!<br><br>
+            Get personalized healthcare 
+            <br><br>
+            assistance at your fingertips.<br><br>
+            Get ready to start a journey with <br><br>
+               our HealthCare ChatBot.</p>
+    </div>
+
+    <script>
+        document.getElementById("user").addEventListener("click", function() {
+            window.location.href = "signin";
+            
+        });
+        document.getElementById("admin").addEventListener("click", function() {
+            window.location.href = "/admin";
+            
+        });
+        
+    </script>
+</body>
+</html>

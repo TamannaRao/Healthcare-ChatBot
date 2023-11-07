@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+      body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding: 0;
+}
+
+.left {
+    left: 0;
+    background: linear-gradient(to right, #21adf8, #4286f4);
+    color: #fff;
+}
+
+.right {
+    right: 0;
+    background-color: #fff;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    
+}
+input:focus {
+    border-color: #4286f4; 
+}
+
+
+.button {
+    background: #21adf8;
+    border: none;
+    border-radius: 25px;
+    color: #fff;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.button:hover {
+    background: #4286f4; 
+}
+
+.login-options {
+    margin-top: 15px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 30px;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    font-family:Arial;
+}
+
+p {
+    font-size: 24px;
+    font-family: Arial ,sans-serif;
+    text-shadow: 2px 2px 5px black;
+    animation: moveText 5s linear infinite;
+}
+
+a {
+    text-decoration: none;
+    color: #21adf8;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.error-message {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+    border-radius: 10px;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+.split.left img {
+   
+    border: 3px solid #21adf8; 
+    border-radius: 50%; 
+}
+
+@keyframes moveText {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(50px); /* Adjust the distance to your preference */
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+    </style>
+</head>
+
+<body>
+    
+<div class="split left">
+    <div class="centered">
+        <img src="https://previews.123rf.com/images/denvitruk/denvitruk2212/denvitruk221200322/195958598-robot-logo-icon-bot-sign-design-chatbot-symbol-concept-voice-support-service-bot-online-support-bot.jpg"  alt="ChatBot" width="200"height="200">
+        <pre>
+        <h1>Welcome to
+     AI HealthCare ChatBot</h1>
+    </pre>
+        <p>Instantly clarifies health related queries!</p>
+    </div>
+</div>
+
+<div class="split right">
+    <div class="centered">
+        <h2>Login</h2>
+        <form action="/signin" method="post">
+
+            {% csrf_token %}
+            <input type="text" id="username" name="username" placeholder="Enter your username (only letters and numbers)" Required>
+            <input type="password" id="password" name="password" placeholder="Enter your password" Required>
+            <button class="button">Login</button>
+            
+        </form>
+        
+
+        <div class="login-options">
+            <!-- Display error message -->
+      {% if messages %}
+         <div class="error-message">
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+        </div>
+      {% endif %}
+
+            <div>Don't have an account yet? <a href="/signup">Sign up</a></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

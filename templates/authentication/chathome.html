@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    display: flex;
+}
+
+#sidebar {
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+}
+
+#content {
+    flex-grow: 1;
+    padding: 2px;
+    margin-left: 250px;
+    max-width: auto;
+    margin-bottom: 50px;
+}
+
+.nav-link {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.nav-link:hover {
+    background-color: #555;
+}
+
+.chat-container {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    opacity: 0.7;
+    font-size: 36px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.user-message {
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
+    display: inline-block;
+}
+
+.bot-message {
+    background-color: #eee;
+    color: #333;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
+    display: block;
+}
+
+.input-container {
+    margin-left: 180px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 90%;
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 80%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    width: 70px;
+    height: 50px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+ 
+    <div id="container">
+        <div id="sidebar">
+            <a href="/chathome" class="nav-link">Home</a>
+            <a href="/chathistory" class="nav-link">History</a>
+            <a href="https://www.google.com/maps/search/near+by+hospital+to+me/@29.8646859,77.8938783,15z/data=!3m1!4b1?entry=ttu" class="nav-link">Location</a>
+            <a href="/profile" class="nav-link">Profile</a>
+            <a href="/signout" class="nav-link" onclick="fun()">Log out</a>
+        </div>
+        <div id="content">
+            <div class="header">Healthcare Chatbot</div>
+            <div class="chat-container" id="chat-container">
+                <div class="message bot-message">Hello! May I know your name?</div>
+            </div>
+            <div class="input-container">
+            <form action ="#" method="post" id="message-form">
+                <input type="text" name="bot" id="user-input" placeholder="Type your message">
+               
+
+                <input type="submit" id="submit-button" value="Send">
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function fun(){
+            alert("You've been logged out successfully")
+        }
+        const chatContainer = document.getElementById("chat-container");
+        const userInput = document.getElementById("user-input");
+        const sendButton = document.getElementById("submit-button");
+        const messageForm = document.getElementById("message-form");
+        
+        // Function to send the user's message
+        function sendMessage(event) {
+            event.preventDefault(); // Prevent the form from submitting
+        
+            const userMessage = userInput.value;
+            userInput.value = '';
+        
+            addMessage("user", userMessage);
+        
+            // Store the message in the database
+            var returnMessage;
+            $.get('/authentication/getResponse',{userM:userMessage}).done(function(data){
+                 returnMessage="<p class='message bot-message'>"+data+"</p>"
+                $('#chat-container').append(returnMessage)    
+                chatContainer.lastElementChild.scrollIntoView();
+            })
+            
+        }
+        
+        sendButton.addEventListener("click", sendMessage);
+        messageForm.addEventListener("submit", sendMessage);
+        
+        function addMessage(sender, message) {
+            const messageDiv = document.createElement("div");
+            messageDiv.className = sender + "-message";
+            messageDiv.textContent = message;
+            chatContainer.appendChild(messageDiv);
+            messageDiv.scrollIntoView();
+        }
+        
+        
+        </script>
+        
+
+
+        
+        
+</body>
+</html>
